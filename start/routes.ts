@@ -19,7 +19,19 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+Route.get('/', async ({response}: HttpContextContract) => {
+  response.redirect().toRoute('EmployeesController.index')
+}).prefix('api/v1')
+
+
+Route.group(() => {
+  Route.get('/employees', 'EmployeesController.index')
+  Route.get('/employees/:id', 'EmployeesController.view')
+
+  Route.post('/employee/add-employee', 'EmployeesController.store')
+  Route.patch('/employee/:id', 'EmployeesController.update')
+
+  Route.delete('employees/:id', 'EmployeesController.destroy')
+}).prefix('api/v1')
