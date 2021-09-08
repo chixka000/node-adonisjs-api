@@ -30,8 +30,8 @@ Route.group(() => {
   Route.get('/employees', 'EmployeesController.index')
   Route.get('/employees/:id', 'EmployeesController.view')
 
-  Route.post('/employee/add-employee', 'EmployeesController.store')
-  Route.patch('/employee/:id', 'EmployeesController.update')
+  Route.post('/employees/add-employee', 'EmployeesController.store')
+  Route.patch('/employees/:id', 'EmployeesController.update')
 
   Route.delete('employees/:id', 'EmployeesController.destroy')
 }).prefix('api/v1')

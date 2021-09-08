@@ -34,9 +34,7 @@ export default class EmployeesController {
 
   public async store(ctx: HttpContextContract) {
     try {
-      const payload = await ctx.request.validate(EmployeeFormValidator);
-
-      const employee = await Employee.create(payload);
+      const employee = await Employee.create(ctx.request.body());
 
       return ctx.response
         .status(201)
@@ -56,8 +54,6 @@ export default class EmployeesController {
       });
     }
     try {
-      await ctx.request.validate(EmployeeFormValidator);
-
       await Employee.query().where('id', ctx.params.id).update(ctx.request.body())
 
       const newData = await Employee.find(ctx.params.id);
